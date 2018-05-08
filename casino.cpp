@@ -67,89 +67,89 @@ int playRoulette() {
     return 0;
 }
 
-
-int playCraps() {
-    enum class Status { CONTINUE, WON, LOST };
-
-    unsigned int diceRoll;
-
-    srand(static_cast<unsigned int>(time(0)));
-
-    unsigned int myPoint = 0;
-    Status gameStatus;
-    unsigned int sumOfDice;
-
-    sumOfDice = diceRoll();
-
-    switch (sumOfDice) {
-        case 7:
-        case 11:
-        gameStatus = Status::WON;
-        break;
-        case 2:
-        case 3:
-        case 12:
-        gameStatus = Status::WON;
-        break;
-        default:
-        gameStatus = Status::CONTINUE;
-        myPoint = sumOfDice;
-        cout << "Point is" << myPoint << endl;
-        break;
-    }
-    while (Status::CONTINUE == gameStatus) {
-        sumOfDice = diceRoll;
-
-        if (sumOfDice == myPoint) {
-            gameStatus = Status::WON;
-        }
-        else {
-            if (sumOfDice == 7) {
-                gameStatus = Status::LOST;
-            }
-        }
-    }
-    if (Status::WON == gameStatus) {
-        cout << "Player wins" << endl;
-    }
-    else {
-        cout << "Player loses" << endl;
-    }
-}
-
-unsigned int diceRoll() {
-    int die1 = 1 + rand() % 6;
-    int die2 = 1 + rand() % 6;
-    int sum = die1 + die2;
-
-    cout << "player rolled" << die1 << "+" << die2 << "="
-    << sum << endl;
-    return sum;
-}
-
-int playBlackjack() {
-
-    const size_t suit = 4;
-    const size_t ranks = 13;
-
-    // int main() {
-        srand(time(0));
-        int player = 0;
-        int computer = 0;
-
-        array<array<int, ranks>suit>deck = { 2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
-        deal(player, computer, deck);
-        for (auto suit : deck)
-        {
-            for (auto : ranks)
-            cout << ranks << " ";
-            cout << endl;
-        }
-        cout << "Player has" << player << endl;
-        cout << "Computer has" << computer << endl;
-    // }
-}
-
+//
+// int playCraps() {
+//     enum class Status { CONTINUE, WON, LOST };
+//
+//     unsigned int diceRoll;
+//
+//     srand(static_cast<unsigned int>(time(0)));
+//
+//     unsigned int myPoint = 0;
+//     Status gameStatus;
+//     unsigned int sumOfDice;
+//
+//     sumOfDice = diceRoll();
+//
+//     switch (sumOfDice) {
+//         case 7:
+//         case 11:
+//         gameStatus = Status::WON;
+//         break;
+//         case 2:
+//         case 3:
+//         case 12:
+//         gameStatus = Status::WON;
+//         break;
+//         default:
+//         gameStatus = Status::CONTINUE;
+//         myPoint = sumOfDice;
+//         cout << "Point is" << myPoint << endl;
+//         break;
+//     }
+//     while (Status::CONTINUE == gameStatus) {
+//         sumOfDice = diceRoll;
+//
+//         if (sumOfDice == myPoint) {
+//             gameStatus = Status::WON;
+//         }
+//         else {
+//             if (sumOfDice == 7) {
+//                 gameStatus = Status::LOST;
+//             }
+//         }
+//     }
+//     if (Status::WON == gameStatus) {
+//         cout << "Player wins" << endl;
+//     }
+//     else {
+//         cout << "Player loses" << endl;
+//     }
+// }
+//
+// unsigned int diceRoll() {
+//     int die1 = 1 + rand() % 6;
+//     int die2 = 1 + rand() % 6;
+//     int sum = die1 + die2;
+//
+//     cout << "player rolled" << die1 << "+" << die2 << "="
+//     << sum << endl;
+//     return sum;
+// }
+//
+// int playBlackjack() {
+//
+//     const size_t suit = 4;
+//     const size_t ranks = 13;
+//
+//     // int main() {
+//         srand(time(0));
+//         int player = 0;
+//         int computer = 0;
+//
+//         array<array<int, ranks>suit>deck = { 2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
+//         deal(player, computer, deck);
+//         for (auto suit : deck)
+//         {
+//             for (auto : ranks)
+//             cout << ranks << " ";
+//             cout << endl;
+//         }
+//         cout << "Player has" << player << endl;
+//         cout << "Computer has" << computer << endl;
+//     // }
+// }
+//
 
 int main() {
     cout << "Pick a game\n1.Blackjack\n2.Craps\n3.Roulette" << endl;
@@ -171,30 +171,30 @@ int main() {
 
     return 0;
 }
-
-int hit(array<array<int, ranks>, suit>&d) {
-    int card;
-    int suit = rand() % 4;
-    int ranks = rand() % 13;
-
-    card = d[suit][ranks];
-    if (card == 0)
-    hit(d);
-    d[suit][ranks] = 0;
-    cout << suit << " " << ranks << " " << card << endl;
-    if (suit == 0)
-    cout << ranks + 2 << "of clubs" << endl;
-    if (suit == 1)
-    cout << ranks + 2 << "of hearts" << endl;
-    if (suit == 2)
-    cout << ranks + 2 << "of diamonds" << endl;
-    if (suit == 3)
-    cout << ranks + 2 << "of spades" << endl;
-    return card;
-}
-void deal(int &player, int &computer, array<array<int, ranks>suit>&d) {
-    player = player + hit(d);
-    computer = computer + hit(d);
-    player = player + hit(d);
-    computer = computer + hit(d);
-}
+//
+// int hit(array<array<int, ranks>, suit>&d) {
+//     int card;
+//     int suit = rand() % 4;
+//     int ranks = rand() % 13;
+//
+//     card = d[suit][ranks];
+//     if (card == 0)
+//     hit(d);
+//     d[suit][ranks] = 0;
+//     cout << suit << " " << ranks << " " << card << endl;
+//     if (suit == 0)
+//     cout << ranks + 2 << "of clubs" << endl;
+//     if (suit == 1)
+//     cout << ranks + 2 << "of hearts" << endl;
+//     if (suit == 2)
+//     cout << ranks + 2 << "of diamonds" << endl;
+//     if (suit == 3)
+//     cout << ranks + 2 << "of spades" << endl;
+//     return card;
+// }
+// void deal(int &player, int &computer, array<array<int, ranks>suit>&d) {
+//     player = player + hit(d);
+//     computer = computer + hit(d);
+//     player = player + hit(d);
+//     computer = computer + hit(d);
+// }
